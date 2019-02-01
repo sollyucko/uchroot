@@ -362,10 +362,10 @@ def process_environment(env_dict):
   """Given an environment dictionary, merge any lists with pathsep and return
      the new dictionary."""
   out_dict = {}
-  for key, value in env_dict.iteritems():
+  for key, value in env_dict.items() if sys.version_info[0] >= 3 else env_dict.iteritems():
     if isinstance(value, list):
       out_dict[key] = ':'.join(value)
-    elif isinstance(value, (str, unicode)):
+    elif isinstance(value, str if sys.version_info[0] >= 3 else (str, unicode)):
       out_dict[key] = value
     else:
       out_dict[key] = str(value)

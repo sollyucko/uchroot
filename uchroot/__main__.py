@@ -59,7 +59,7 @@ def main():
     elif isinstance(value, bool):
       parser.add_argument('--' + key.replace('_', '-'), nargs='?', default=None,
                           const=True, type=parse_bool, help=helpstr)
-    elif isinstance(value, (str, unicode, int, float)) or value is None:
+    elif isinstance(value, (str, int, float) if sys.version_info[0] >= 3 else (str, unicode, int, float)) or value is None:
       parser.add_argument('--' + key.replace('_', '-'))
     # NOTE(josh): argparse behavior is that if the flag is not specified on
     # the command line the value will be None, whereas if it's specified with
